@@ -135,18 +135,18 @@ Prettier можно интегрировать с ESLint, тогда `eslint --f
 Сюда же относится использование "магических" констант. Плохо, когда в коде встречается числовое значение и при этом не очевидно, что оно значает. Используйте именнованные константы.
 
 Плохо
+
 ```
 <div className="container">{teacherInfo(2)}</div>
 ```
 
 Хорошо
+
 ```
 <div className="container">{teacherInfo(CT.MAJOR_TEACHER)}</div>
 ```
 
 ### Примеры:
-
-
 
 - ## DRY (Don't repeat yourself)
 
@@ -175,23 +175,97 @@ Prettier можно интегрировать с ESLint, тогда `eslint --f
 Функция `validateEmail(email)` может, кроме проверки e-mail на правильность, выводить сообщение об ошибке и просить заново ввести e-mail.
 
 Такая функция имеет больше одной причины для изменения:
- * новые правила валидации
- * новые правила формирования сообщения об ошибке
- * новая логика отображения сообщения
+
+- новые правила валидации
+- новые правила формирования сообщения об ошибке
+- новая логика отображения сообщения
 
 Лучше разделить:
- * `isValid(email)`
- * `showMessage(message)`
- 
- К тому же теперь эти функции можно легко переиспользовать!
+
+- `isValid(email)`
+- `showMessage(message)`
+
+К тому же теперь эти функции можно легко переиспользовать!
 
 - ## OLID ?
 
-* максимальная линейность
+- ## Низкая связность
 
-* краткость
+### Примеры:
 
-* самодокументируемость
+Компонент blog-preview
+
+<img src="./assets/blog-preview.png" alt="blog-preview" width="500px" />
+
+Использование
+```
+<BlogPreview items={this.props.blogPosts} />
+```
+В рендере выделяем первый элемент с помощью модификатора (жестко завязаны на BlogItem)
+```
+render = () => (
+  <ul className={`blog-preview ${this.props.className || ''}`}>
+    {this.props.blog &&
+      this.props.blog.map((blogItem, i) => (
+        <li
+          key={blogItem.id}
+          className={`blog-preview__item ${
+            i === 0 && !this.props.noAccent ? 'blog-preview__item_accent' : ''
+          }`}
+        >
+          <BlogItem
+            className={i === 0 && !this.props.noAccent ? 'blog-item_accent' : ''}
+            {...blogItem}
+          />
+        </li>
+      ))}
+  </ul>
+);
+```
+
+Отделяем blog-preview от blog-item:
+Использование
+```
+<ThreeInRow
+  component={BlogItem}
+  items={this.props.blogPosts}
+  isFirstItemAccent
+  accentModifier="blog-item_accent"
+/>
+```
+По-прежнему выделяем первый элемент, но теперь абстрактно
+```
+render = () => (
+  <ul className={cn('three-in-row', this.props.className)}>
+    {Array.isArray(this.props.items) &&
+      this.props.items.map((item, i) => {
+        const isAccent = i === 0 && this.props.isFirstItemAccent;
+        return (
+          <li
+            key={item.id}
+            className={cn('three-in-row__item', { 'three-in-row__item_accent': isAccent })}
+          >
+            <this.props.component
+              className={cn({ [this.props.accentModifier]: isAccent })}
+              {...item}
+            />
+          </li>
+        );
+      })}
+  </ul>
+);
+```
+
+Можно переиспользовать!
+
+<img src="./assets/three-in-row.png" alt="three-in-row" width="500px" />
+
+
+- максимальная линейность
+
+- краткость
+
+- самодокументируемость
 
 ## Правила хорошего кода
 
