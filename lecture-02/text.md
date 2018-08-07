@@ -302,6 +302,48 @@ pick a88e4ef Started myfeatrue
 
 <img src="./assets/debug.png" alt="debug evolution" width="500px" />
 
+## console.log()
+
+## console.assert(выражение, сообщение)
+Console.assert выдает ошибку, если вычисленное выражение false. 
+
+## console.count(ярлык)
+Это console.log, который подсчитывает, сколько раз он был вызван с тем же самым выражением.
+
+## console.table()
+```
+const fruits = [
+  { name: 'apple', like: true },
+  { fff: 'pear', like: true },
+  { name: 'plum', like: false },
+];
+console.table(fruits);
+```
+<img src="./assets/console-table.png" alt="console.table()" width="500px" />
+
+Вторым аргументом можно указать только требуемые ключи. 
+```
+console.table(fruits), ['name'];
+```
+Бонус: таблица сортируемая.
+
+## console.group()
+
+```
+const galleries = [{id: 1, value: [{src: '1'},{src: '2'}]},{id: 2, value: [{src: '3'},{src: '4'}]}];
+
+galleries.forEach(gallery => {
+  console.group(`gallery ${gallery.id}`);
+  gallery.value.forEach(img => {
+    console.group(`img ${img.src}`);
+    console.groupEnd();
+  });
+  console.groupEnd();
+});
+```
+
+<img src="./assets/console-group.png" alt="console.group()" width="500px" />
+
 git: bisect, rebase, squash, git flow, линтеры, ide, техники дебага
 
 
