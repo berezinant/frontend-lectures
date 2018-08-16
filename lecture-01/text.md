@@ -136,13 +136,13 @@ Prettier можно интегрировать с ESLint, тогда `eslint --f
 
 Плохо
 
-```
+```js
 <div className="container">{teacherInfo(2)}</div>
 ```
 
 Хорошо
 
-```
+```js
 <div className="container">{teacherInfo(CT.MAJOR_TEACHER)}</div>
 ```
 
@@ -198,23 +198,26 @@ Prettier можно интегрировать с ESLint, тогда `eslint --f
 <img src="./assets/blog-preview.png" alt="blog-preview" width="500px" />
 
 Использование
-```
+
+```js
 <BlogPreview items={this.props.blogPosts} />
 ```
+
 В рендере выделяем первый элемент с помощью модификатора (жестко завязаны на BlogItem)
-```
+
+```js
 render = () => (
-  <ul className={`blog-preview ${this.props.className || ''}`}>
+  <ul className={cn('blog-preview', this.props.className)}>
     {this.props.blog &&
       this.props.blog.map((blogItem, i) => (
         <li
           key={blogItem.id}
-          className={`blog-preview__item ${
-            i === 0 && !this.props.noAccent ? 'blog-preview__item_accent' : ''
-          }`}
+          className={cn('blog-preview__item', {
+            'blog-preview__item_accent': i === 0 && !this.props.noAccent,
+          })}
         >
           <BlogItem
-            className={i === 0 && !this.props.noAccent ? 'blog-item_accent' : ''}
+            className={cn({ 'blog-item_accent': i === 0 && !this.props.noAccent })}
             {...blogItem}
           />
         </li>
@@ -225,7 +228,8 @@ render = () => (
 
 Отделяем blog-preview от blog-item:
 Использование
-```
+
+```js
 <ThreeInRow
   component={BlogItem}
   items={this.props.blogPosts}
@@ -233,8 +237,10 @@ render = () => (
   accentModifier="blog-item_accent"
 />
 ```
+
 По-прежнему выделяем первый элемент, но теперь абстрактно
-```
+
+```js
 render = () => (
   <ul className={cn('three-in-row', this.props.className)}>
     {Array.isArray(this.props.items) &&
@@ -259,7 +265,6 @@ render = () => (
 Можно переиспользовать!
 
 <img src="./assets/three-in-row.png" alt="three-in-row" width="500px" />
-
 
 - максимальная линейность
 

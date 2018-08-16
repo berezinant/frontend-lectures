@@ -311,7 +311,7 @@ Console.assert выдает ошибку, если вычисленное выр
 Это console.log, который подсчитывает, сколько раз он был вызван с тем же самым выражением.
 
 ## console.table()
-```
+```js
 const fruits = [
   { name: 'apple', like: true },
   { fff: 'pear', like: true },
@@ -322,14 +322,15 @@ console.table(fruits);
 <img src="./assets/console-table.png" alt="console.table()" width="500px" />
 
 Вторым аргументом можно указать только требуемые ключи. 
-```
+
+```js
 console.table(fruits), ['name'];
 ```
 Бонус: таблица сортируемая.
 
 ## console.group()
 
-```
+```js
 const galleries = [{id: 1, value: [{src: '1'},{src: '2'}]},{id: 2, value: [{src: '3'},{src: '4'}]}];
 
 galleries.forEach(gallery => {
