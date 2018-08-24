@@ -278,6 +278,8 @@ pick a88e4ef Started myfeatrue
 
 # Про отладку и Git
 
+## TODO как искать всякое в гите https://medium.com/@tygertec/how-to-find-stuff-in-git-35d4cb8c1845
+
 Используйте `аннотации` `git blame` для того, чтобы узнать, кто, когда и зачем поменял внес непонятное изменение.
 
 Можно использовать в консоли или в интерфейсе  bitbucket/gitlab/github.
