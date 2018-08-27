@@ -268,6 +268,21 @@ render = () => (
 
 - максимальная линейность
 
+```js
+if (filterItemId === CF.FILTERS_ALL) {
+  history.push = '#';
+} else {
+  history.push(`#${filterItemId}`);
+}
+```
+
+vs
+
+```js
+const hash = filterItemId === CF.FILTERS_ALL ? '#' : `#${filterItemId}`;
+history.push(hash);
+```
+
 - краткость
 
 - самодокументируемость
