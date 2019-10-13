@@ -42,7 +42,6 @@ for (let i = 0; i < args.length; i++) {
 Конечно, не стоит абсолютно всегда отказываться от `for`, но чаще всего можно воспользоваться более подходящими методами вроде `forEach`, `map`, and `reduce` (а также `filter`, `some` и [многие другие](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Array)).
 
 Плюсы:
-
 - декларативный стиль, простота
 - меньший объем
 - дополнительная семантика определенного метода
